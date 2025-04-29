@@ -40,8 +40,8 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
     ports:
       - 32400:32400
-    devices:
-     - /dev/dri:/dev/dri #Required for plex HW transcoding / QuickSync
+    #devices:
+    # - /dev/dri:/dev/dri #Required for plex HW transcoding / QuickSync
     volumes:
       - ${BASE_PATH}/plex/config:/config
       - ${MEDIA_SHARE}/media/tv:/tv
