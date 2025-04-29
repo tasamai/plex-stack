@@ -190,6 +190,8 @@ services:
       - ${BASE_PATH}/qbittorrent/config:/config
       - ${MEDIA_SHARE}:/share
     restart: unless-stopped
+    ports:
+      - 8080:8080
       
   #Tautulli - for plex statistics. Very useful when troubleshooting performance issues
   tautulli:
