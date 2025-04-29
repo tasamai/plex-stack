@@ -374,7 +374,3 @@ services:
       - ${BASE_PATH}/recyclarr/config:/config
     environment:
       - TZ=${TZ}
-
-  env_file:
-    - stack.env
- 
