@@ -235,8 +235,8 @@ services:
       - ${BASE_PATH}/tdarr/logs:/app/logs
       - ${MEDIA_SHARE}:/media
       - /transcode_cache:/temp
-    devices:
-     - /dev/dri:/dev/dri #Required for HW transcoding / QuickSync
+    #devices:
+    # - /dev/dri:/dev/dri #Required for HW transcoding / QuickSync
      
   #Membarr - to invite users via discord
   #
