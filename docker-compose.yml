@@ -53,6 +53,7 @@ services:
     image: qmcgaw/gluetun
     container_name: gluetun
     ports:
+      - 6789:6789 #NZBget
       - 5055:5055 #overseerr
       - 9696:9696 #prowlarr
       - 7878:7878 #radarr
@@ -415,6 +416,7 @@ services:
     environment:
       - TZ=${TZ}
 
+  #Jellyfin media server
   jellyfin:
     image: linuxserver/jellyfin
     network_mode: bridge
@@ -426,4 +428,23 @@ services:
     volumes:
       - ${MEDIA_SHARE}Jellyfin/config:/config
       - ${MEDIA_SHARE}:/share
+    restart: unless-stopped
+
+  #nzbget downloader
+  nzbget:
+    image: nzbgetcom/nzbget:latest
+    container_name: nzbget
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - NZBGET_USER=nzbget     #optional
+      - NZBGET_PASS=tegbzn6789 #optional
+    volumes:
+      - /path/to/config:/config
+      - ${MEDIA_SHARE}:/share
+      #- /path/to/downloads:/downloads #optional
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 6789:6789
     restart: unless-stopped
