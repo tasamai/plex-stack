@@ -47,6 +47,34 @@ services:
       - ${MEDIA_SHARE}/media/tv:/tv
       - ${MEDIA_SHARE}/media/movies:/movies
     restart: unless-stopped
+  
+  #gluetun - vpn access
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    ports:
+      - 9696:9696 #prowlarr
+      - 7878:7878 #radarr
+      - 8989:8989 #sonarr
+      - 6767:6767 #bazarr
+      - 8686:8686 #lidarr
+      - 7474:7474 #Autoarr
+      - 8787:8787 #readarr
+      - 2468:2468 #cross-seed
+      - 8694:8694 #qbittorrent
+      - 8080:8080 #qbittorrent
+      - 6881:6881 #qbittorrent
+      - 6881:6881/udp #qbittorrent
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - VPN_TYPE=openvpn # or wireguard
+      - OPENVPN_USER=qHuKQA32vpvt5Bx3B6kfn2aw
+      - OPENVPN_PASSWORD=T46mc3GZtFykyN2qjNLq9Atd
+      - SERVER_COUNTRIES=Netherlands
     
   #Radarr - used to find movies automatically
   radarr:
@@ -61,8 +89,9 @@ services:
       - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
-    ports:
-      - 7878:7878
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 7878:7878
     restart: unless-stopped
     
   #Sonarr - used to find tv shows automatically
@@ -78,8 +107,9 @@ services:
       - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
-    ports:
-      - 8989:8989
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 8989:8989
     restart: unless-stopped
   
   #Readarr - Used to download books
@@ -93,9 +123,9 @@ services:
     volumes:
       - ${BASE_PATH}/readarr/config:/config
       - ${MEDIA_SHARE}:/share 
-
-    ports:
-      - 8787:8787
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 8787:8787
     restart: unless-stopped
     
   #Lidarr - Used to download music 
@@ -108,9 +138,10 @@ services:
       - TZ=${TZ}
     volumes:
       - ${BASE_PATH}/lidarr/config:/config
-      - ${MEDIA_SHARE}:/share 
-    ports:
-      - 8686:8686
+      - ${MEDIA_SHARE}:/share
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 8686:8686
     restart: unless-stopped
     
   #Prowlarr - manages your Sonarr, Radarr and download client
@@ -125,8 +156,9 @@ services:
       - ${BASE_PATH}/prowlarr/config:/config
     #networks:
     #  - proxy
-    ports:
-      - 9696:9696
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 9696:9696
     restart: unless-stopped
     
   #Autobrr - used to grab torrents using the trackers IRC channel - Increases seeding due to grabbing content before RSS feed
@@ -140,8 +172,9 @@ services:
       - PGID=${GUID}
     volumes:
       - ${BASE_PATH}/autobrr/config:/config
-    ports:
-      - 7474:7474
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 7474:7474
 
   #Overseer - allows users to request media on their own
   overseerr:
@@ -156,8 +189,9 @@ services:
       - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks:
     #  - proxy
-    ports:
-      - 5055:5055
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 5055:5055
     restart: unless-stopped
     
   #Flaresolerr - Used as a proxy server to bypass Cloudflare and DDoS-GUARD protection.
@@ -190,8 +224,9 @@ services:
       - ${BASE_PATH}/qbittorrent/config:/config
       - ${MEDIA_SHARE}:/share
     restart: unless-stopped
-    ports:
-      - 8080:8080
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 8080:8080
       
   #Tautulli - for plex statistics. Very useful when troubleshooting performance issues
   tautulli:
@@ -291,8 +326,9 @@ services:
     environment:
       - PUID=${PUID}
       - PGID=${GUID}
-    ports:
-      - "2468:2468" # you'll need this for daemon mode only
+    network_mode: "service:gluetun"
+    #ports:
+    #  - "2468:2468" # you'll need this for daemon mode only
     volumes:
       - ${BASE_PATH}/cross-seed/config:/config #To configure you have to manually nano the config file
       - ${BASE_PATH}/qbittorent/config/qBittorrent/BT_backup:/torrents:ro # your torrent clients .torrent cache, can and should be mounted read-only (e.g. qbit: `BT_Backup` | deluge: `state` | transmission: `transmission/torrents` | rtorrent: session dir from `.rtorrent.rc`)
