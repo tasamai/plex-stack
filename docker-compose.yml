@@ -70,7 +70,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
-      - VPN_SERVICE_PROVIDER=nordvpn
+      - VPN_SERVICE_PROVIDER=surfshark
       - VPN_TYPE=openvpn # or wireguard
       - OPENVPN_USER=qHuKQA32vpvt5Bx3B6kfn2aw
       - OPENVPN_PASSWORD=T46mc3GZtFykyN2qjNLq9Atd
