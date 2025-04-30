@@ -53,6 +53,7 @@ services:
     image: qmcgaw/gluetun
     container_name: gluetun
     ports:
+      - 5055:5055 #overseerr
       - 9696:9696 #prowlarr
       - 7878:7878 #radarr
       - 8989:8989 #sonarr
