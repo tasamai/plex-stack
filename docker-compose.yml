@@ -301,8 +301,9 @@ services:
     volumes:
       - ${BASE_PATH}/bazarr/config:/config
       - ${MEDIA_SHARE}:/share
-    ports:
-      - 6767:6767
+    network_mode: "service:gluetun"
+    #ports:
+    #  - 6767:6767
       
   #Plex Auto Languages - This switchs languages automatically example: watching english show and non english speaks you get subtitle lol
   plexautolanguages:
