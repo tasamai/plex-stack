@@ -72,8 +72,8 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=surfshark
       - VPN_TYPE=openvpn # or wireguard
-      - OPENVPN_USER=qHuKQA32vpvt5Bx3B6kfn2aw
-      - OPENVPN_PASSWORD=T46mc3GZtFykyN2qjNLq9Atd
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASS}
       - SERVER_COUNTRIES=Netherlands
     
   #Radarr - used to find movies automatically
