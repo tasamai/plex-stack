@@ -386,7 +386,7 @@ services:
       - '7359:7359/udp'   # Network discovery
       - '1900:1900/udp'   # DLNA port
     volumes:
-      - ${MEDIA_SHARE}Jellyfin/config:/config
+      - ${MEDIA_SHARE}Jellyfin/config:/newconfig
       - ${MEDIA_SHARE}Radarr/movies:/data/Movies
       - ${MEDIA_SHARE}Sonarr/tvshows:/data/TVShows
       - ${MEDIA_SHARE}Lidarr/music:/data/Music
