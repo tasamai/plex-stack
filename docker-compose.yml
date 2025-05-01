@@ -495,3 +495,10 @@ services:
     #ports:
     #  - 6789:6789
     restart: unless-stopped
+
+networks:
+  vpn:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
