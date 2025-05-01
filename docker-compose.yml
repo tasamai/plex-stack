@@ -96,8 +96,7 @@ services:
       - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
-    networks:
-      - vpn
+    network_mode: "service:gluetun"
     #ports:
     #  - 7878:7878
     restart: unless-stopped
@@ -117,8 +116,7 @@ services:
       - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
-    networks:
-      - vpn
+    network_mode: "service:gluetun"
     #ports:
     #  - 8989:8989
     restart: unless-stopped
