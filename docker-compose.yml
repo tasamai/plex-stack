@@ -97,8 +97,7 @@ services:
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
     networks:
-      vpn:
-        ipv4_address: 172.20.0.4
+      - vpn
     #ports:
     #  - 7878:7878
     restart: unless-stopped
@@ -119,8 +118,7 @@ services:
     #networks: #Does not connect to overseer if you use NPM
     #  - proxy
     networks:
-      vpn:
-        ipv4_address: 172.20.0.5
+      - vpn
     #ports:
     #  - 8989:8989
     restart: unless-stopped
