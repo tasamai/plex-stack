@@ -134,9 +134,7 @@ services:
     volumes:
       - ${BASE_PATH}/readarr/config:/config
       - ${MEDIA_SHARE}:/share 
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.6
+    network_mode: "service:gluetun"
     #ports:
     #  - 8787:8787
     restart: unless-stopped
@@ -154,9 +152,7 @@ services:
     volumes:
       - ${BASE_PATH}/lidarr/config:/config
       - ${MEDIA_SHARE}:/share
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.7
+    network_mode: "service:gluetun"
     #ports:
     #  - 8686:8686
     restart: unless-stopped
@@ -175,9 +171,7 @@ services:
       - ${BASE_PATH}/prowlarr/config:/config
     #networks:
     #  - proxy
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.8
+    network_mode: "service:gluetun"
     #ports:
     #  - 9696:9696
     restart: unless-stopped
@@ -195,9 +189,7 @@ services:
       - PGID=${GUID}
     volumes:
       - ${BASE_PATH}/autobrr/config:/config
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.9
+    network_mode: "service:gluetun"
     #ports:
     #  - 7474:7474
 
@@ -216,9 +208,7 @@ services:
       - ${MEDIA_SHARE}:/share #Access to the entire share
     #networks:
     #  - proxy
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.10
+    network_mode: "service:gluetun"
     #ports:
     #  - 5055:5055
     restart: unless-stopped
@@ -255,9 +245,7 @@ services:
       - ${BASE_PATH}/qbittorrent/config:/config
       - ${MEDIA_SHARE}:/share
     restart: unless-stopped
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.11
+    network_mode: "service:gluetun"
     #ports:
     #  - 8080:8080
       
@@ -336,9 +324,7 @@ services:
     volumes:
       - ${BASE_PATH}/bazarr/config:/config
       - ${MEDIA_SHARE}:/share
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.12
+    network_mode: "service:gluetun"
     #ports:
     #  - 6767:6767
       
@@ -366,9 +352,7 @@ services:
     environment:
       - PUID=${PUID}
       - PGID=${GUID}
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.13
+    network_mode: "service:gluetun"
     #ports:
     #  - "2468:2468" # you'll need this for daemon mode only
     volumes:
@@ -485,9 +469,7 @@ services:
       - /path/to/config:/config
       - ${MEDIA_SHARE}:/share
       #- /path/to/downloads:/downloads #optional
-    networks:
-      vpn:
-        ipv4_address: 172.20.0.14
+    network_mode: "service:gluetun"
     #ports:
     #  - 6789:6789
     restart: unless-stopped
