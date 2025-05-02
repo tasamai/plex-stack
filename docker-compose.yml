@@ -46,6 +46,7 @@ services:
       - ${BASE_PATH}/plex/config:/config
       - ${MEDIA_SHARE}/media/tv:/tv
       - ${MEDIA_SHARE}/media/movies:/movies
+      - ${MEDIA_SHARE}:/share
     restart: unless-stopped
   
   #gluetun - vpn access
